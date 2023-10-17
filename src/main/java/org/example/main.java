@@ -13,10 +13,10 @@ public class main extends frame {
         Startbutton.setBackground(Color.WHITE);
         add(Startbutton);
 
-        JButton button2 = new JButton("버튼 2");
-        button2.setBounds(1080/2 - 150, 720 - 200 , 300, 100);
-        button2.setBackground(Color.WHITE);
-        add(button2);
+        JButton button = new JButton("버튼 2");
+        button.setBounds(1080/2 - 150, 720 - 200 , 300, 100);
+        button.setBackground(Color.WHITE);
+        add(button);
 
     }
     public static void main(String[] args) {

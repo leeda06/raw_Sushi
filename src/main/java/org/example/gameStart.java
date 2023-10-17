@@ -5,6 +5,5 @@ public class gameStart extends frame{
 
     }
     public static void main(String[] args) {
-        gameStart frame = new gameStart();
     }
 }

@@ -25,15 +25,7 @@ class User {
     public void setPw(String pw) {
         this.pw = pw;
     }
-    @Override
-    pubilc boolean equals(Object o) {
-        if(o == null || !(o instanceof User)) {
-            return false;
-        }
-        User temp = (User)o;
 
-        return id.equals(temp.getId());
-    }
     @Override
     public String toString() {
         String info = "Id: " + id + "\n";

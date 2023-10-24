@@ -1,9 +1,13 @@
 package org.example;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class Frame extends JFrame{
     public static final int WIDTH = 1080;
     public static final int HEIGHT = 720;
+    Image screenImage;
+    Graphics screenGraphics;
+    JLabel background;
 
     public Frame() {
         setSize(1080, 720); // 창 크기 설정
@@ -13,6 +17,18 @@ public class Frame extends JFrame{
         setLocationRelativeTo(null);
         setLayout(null);
         setVisible(true);
+        background=null;//배경이미지
+    }
+    public void paint(Graphics g) {//그리는 함수
+        screenImage = createImage(Frame.WIDTH, Frame.HEIGHT);
+        screenGraphics = screenImage.getGraphics();
+        screenDraw(screenGraphics);
+        g.drawImage(screenImage, 0, 0, null);//background를 그려줌
+    }
+
+    public void screenDraw(Graphics g) {
+        paintComponents(g);
+        this.repaint();
     }
 
     public static void main(String[] args) {

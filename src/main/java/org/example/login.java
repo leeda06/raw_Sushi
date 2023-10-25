@@ -1,46 +1,44 @@
 package org.example;
 
+import java.awt.*;
 import java.util.Scanner;
+import javax.swing.*;
 
-class User {
-    private String id;
-    private String pw;
 
-    public User(String id, String pw) {
-        setId(id);
-        setPw(pw);
-    }
-    public User(String id) {
-        setId(id);
-    }
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getPw() {
-        return pw;
-    }
-    public void setPw(String pw) {
-        this.pw = pw;
-    }
 
-    @Override
-    public String toString() {
-        String info = "Id: " + id + "\n";
-        info += "Pw: " + pw + "\n";
-        return info;
-    }
-
-}
-
-public class login extends frame{
+public class login extends Frame{
     public login(){
 
     }
+
     public static void main(String []args){
         Scanner scan = new Scanner(System.in);
-        login frame = new login();
+        JFrame frame = new JFrame("로그인 화면");
+
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(700, 500);
+
+        JPanel panel1 = new JPanel();
+
+        JButton button1 = new JButton("로그인");
+        JButton button2 = new JButton("회원가입");
+
+        button1.setBounds(200, 50, 100, 30);
+        button2.setBounds(200, 50, 100, 30);
+
+        panel1.add(button1);
+        panel1.add(button2);
+
+        frame.add(panel1);
+
+        // 화면 중앙에 창 뜨게
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - frame.getWidth()) / 2;
+        int y = (dim.height - frame.getHeight()) / 2;
+        frame.setLocation(x, y);
+
+
+        frame.setVisible(true);
     }
 }

@@ -7,12 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class gameStart extends Frame{
-    public static void main(String []args){
-        Scanner scan = new Scanner(System.in);
-        gameStart frame = new gameStart();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 300);
-        frame.setLayout(new FlowLayout());
+    public static void main(String[] args){}
+    public gameStart(){
 
         String[] imagePaths = {
                 "image1.jpg",
@@ -30,14 +26,12 @@ public class gameStart extends Frame{
             imageButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(frame, "이미지 버튼 클릭됨");
+                    System.out.println("클릭");
                 }
             });
 
-            frame.add(imageButton);
+            add(imageButton);
         }
-
-        frame.setVisible(true);
     }
 }
 

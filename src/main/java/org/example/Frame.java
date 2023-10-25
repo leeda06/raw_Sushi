@@ -10,7 +10,7 @@ public class Frame extends JFrame{
     JLabel background;
 
     public Frame() {
-        setSize(1024, 720); // 창 크기 설정
+        setSize(WIDTH, HEIGHT); // 창 크기 설정
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창을 닫을 때 프로그램 종료
         setTitle("원시초밥");
         setResizable(false);

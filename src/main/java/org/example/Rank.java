@@ -29,6 +29,13 @@ public class Rank extends JFrame {
         add(nextButton);
 
         startButton2.setBounds(Frame.WIDTH/2 - 520 / 2,100/2 - 30  ,520,70);
+        startButton2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                new Rank();
+                setVisible(false);
+            }
+        });
         add(startButton2);
 
         JPanel scrollablePanel = new JPanel();
@@ -36,7 +43,7 @@ public class Rank extends JFrame {
         scrollablePanel.setBackground(backColor); // 배경색을 검정으로
 
         scrollablePanel.add(padding);
-        for (int i = 1; i <= 100; i++) { // 100개의 아이템을 추가하여 스크롤이 필요하도록 함
+        for (int i = 1; i <= 30; i++) { // 100개의 아이템을 추가하여 스크롤이 필요하도록 함
 
             JPanel panel = new JPanel();
             panel.setPreferredSize(new Dimension(100, 100));

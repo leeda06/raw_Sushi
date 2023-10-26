@@ -6,10 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main extends Frame {
-    private JButton startButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/startButton .png")));
-    private JButton ExButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/ExButton.png")));
-    private JButton rankButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/rankButton.png")));
-    private JButton logOutButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/logOutButton.png")));
+    private JButton startButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Main_/startButton .png")));
+    private JButton ExButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Main_/ExButton.png")));
+    private JButton rankButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Main_/rankButton.png")));
+    private JButton logOutButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Main_/logOutButton.png")));
     public Main(){
         int btn_width = 225;
         int btn_height = 75;

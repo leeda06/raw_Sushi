@@ -9,9 +9,10 @@ public class Rank extends JFrame {
         new Rank();
     }
     private Color backColor = Color.ORANGE;
-    private JButton nextButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Rank_/nextButton.png")));
-    private JButton startButton2 = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Rank_/titleButton.png")));
-    private ImageIcon imageIcon = new ImageIcon(Main.class.getResource("/static/db/img/Rank_/coin.png"));
+    // 이미지 버튼에 사용될
+    private JButton nextButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Rank_/nextButton.png")));
+    private JButton startButton2 = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Rank_/titleButton.png")));
+    private ImageIcon imageIcon = new ImageIcon(Main.class.getResource(Frame.LINK+"Rank_/coin.png"));
     public Rank() {
         JPanel padding = new JPanel();
         padding.setLayout(new GridLayout(2, 1)); // 2개의 행, 1개의 열을 가지는 GridLayout

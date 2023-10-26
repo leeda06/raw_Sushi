@@ -14,7 +14,7 @@ public class Main extends Frame {
         int btn_width = 225;
         int btn_height = 75;
         background=new JLabel(new ImageIcon(Main.class.getResource("/static/db/img/Main_/back_main.png")));//배경이미지
-        background.setBounds(0, 0, Frame.WIDTH, Frame.HEIGHT);
+        background.setBounds(0, 0, WIDTH, HEIGHT);
         add(background);
 
 
@@ -48,7 +48,7 @@ public class Main extends Frame {
             }
         });
 
-        logOutButton.setBounds(WIDTH - 60 - btn_width , Frame.HEIGHT - (90 + btn_height), btn_width , btn_height);
+        logOutButton.setBounds(WIDTH - 60 - btn_width , HEIGHT - (90 + btn_height), btn_width , btn_height);
         background.add(logOutButton);
         logOutButton.addMouseListener(new MouseAdapter() {
             @Override

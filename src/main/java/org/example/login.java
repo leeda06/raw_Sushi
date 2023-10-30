@@ -68,10 +68,13 @@ public class login extends Frame{
             public void mousePressed(MouseEvent e) {
                 String idText = iDTextInput.getText();
                 String pwText = pWTextInput.getText();
-                idList.add(idText);
-                pwList.add(pwText);
-                JOptionPane.showMessageDialog(null, "회원가입 완료");
-
+//                if(idList.size() != -1 && pwList.size() != -1 && ((idList.contains(idText) && pwList.contains(pwText)) == false)){
+//                    JOptionPane.showMessageDialog(null, "회원가입 실패\n원인 : 중복");
+//                }else{
+                    idList.add(idText);
+                    pwList.add(pwText);
+                    JOptionPane.showMessageDialog(null, "회원가입 완료");
+//                }
             }
         });
         add(pWButton);

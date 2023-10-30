@@ -6,19 +6,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main extends Frame {
-    private JButton startButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/startButton .png")));
-    private JButton ExButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/ExButton.png")));
-    private JButton rankButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/rankButton.png")));
-    private JButton logOutButton = new JButton(new ImageIcon(Main.class.getResource("/static/db/img/Main_/logOutButton.png")));
+    private JButton startButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/startButton .png")));
+    private JButton ExButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/ExButton.png")));
+    private JButton rankButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/rankButton.png")));
+    private JButton logOutButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/logOutButton.png")));
     public Main(){
         int btn_width = 225;
         int btn_height = 75;
         background=new JLabel(new ImageIcon(Main.class.getResource("/static/db/img/Main_/back_main.png")));//배경이미지
-        background.setBounds(0, 0, Frame.WIDTH, Frame.HEIGHT);
+        background.setBounds(0, 0, WIDTH, HEIGHT);
         add(background);
 
 
-        startButton.setBounds(Frame.WIDTH / 2 - btn_width / 2, Frame.HEIGHT - 63 - 13 - (btn_height * 3), btn_width , btn_height);
+        startButton.setBounds(WIDTH / 2 - btn_width / 2, HEIGHT - 63 - 13 - (btn_height * 3), btn_width , btn_height);
         background.add(startButton);
         startButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -28,7 +28,7 @@ public class Main extends Frame {
             }
         });
 
-        ExButton.setBounds(Frame.WIDTH / 2 - btn_width / 2, Frame.HEIGHT - 63  - (btn_height * 2), btn_width , btn_height);
+        ExButton.setBounds(WIDTH / 2 - btn_width / 2, HEIGHT - 63  - (btn_height * 2), btn_width , btn_height);
         background.add(ExButton);
         ExButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -38,7 +38,7 @@ public class Main extends Frame {
             }
         });
 
-        rankButton.setBounds(40 , Frame.HEIGHT - (90 + btn_height), btn_width , btn_height);
+        rankButton.setBounds(40 , HEIGHT - (90 + btn_height), btn_width , btn_height);
         background.add(rankButton);
         rankButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -48,7 +48,7 @@ public class Main extends Frame {
             }
         });
 
-        logOutButton.setBounds(Frame.WIDTH - 60 - btn_width , Frame.HEIGHT - (90 + btn_height), btn_width , btn_height);
+        logOutButton.setBounds(WIDTH - 60 - btn_width , HEIGHT - (90 + btn_height), btn_width , btn_height);
         background.add(logOutButton);
         logOutButton.addMouseListener(new MouseAdapter() {
             @Override

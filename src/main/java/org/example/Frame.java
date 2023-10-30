@@ -5,6 +5,7 @@ import java.awt.*;
 public class Frame extends JFrame{
     public static final int WIDTH = 1080;
     public static final int HEIGHT = 720;
+    public static final String LINK = "/static/db/img/";
     Image screenImage;
     Graphics screenGraphics;
     JLabel background;
@@ -16,7 +17,7 @@ public class Frame extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(null);
-        setVisible(true);
+        setVisible(true);   // 창보이게
         background=null;//배경이미지
     }
     public void paint(Graphics g) {//그리는 함수

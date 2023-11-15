@@ -1,4 +1,5 @@
 package org.example;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -6,22 +7,21 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class login extends Frame {
+public class login extends Frame {  // JFrame을 상속받도록 수정
     private JTextField iDTextInput = new JTextField(20);
     private JTextField pWTextInput = new JTextField(20);
 
     private ArrayList<String> idList = new ArrayList<>();
-    private ArrayList<String> pwList = new ArrayList<>();
     private String DATABASE_FILE = "user_database.txt";
 
     public login(){
 
         getContentPane().setBackground(Color.ORANGE);
 
-        iDTextInput.setBounds((Frame.WIDTH - 450) / 2 , Frame.HEIGHT - 139 - (70 + (93*3)), 450, 70);
-        pWTextInput.setBounds((Frame.WIDTH - 450) / 2 , Frame.HEIGHT - 139 - (93*2)- 20, 450, 70);
+        iDTextInput.setBounds((getWidth() - 450) / 2 , getHeight() - 139 - (70 + (93*3)), 450, 70);  // getWidth()와 getHeight()로 수정
+        pWTextInput.setBounds((getWidth() - 450) / 2 , getHeight() - 139 - (93*2)- 20, 450, 70);  // getWidth()와 getHeight()로 수정
 
-        Font newFont = new Font("나눔체", Font.PLAIN, 30); // 여기에서 "Arial"은 원하는 폰트 이름이며, 20은 원하는 크기입니다.
+        Font newFont = new Font("나눔체", Font.PLAIN, 30);
         iDTextInput.setFont(newFont);
         pWTextInput.setFont(newFont);
 
@@ -31,8 +31,8 @@ public class login extends Frame {
         JLabel iDText = new JLabel("아이디");
         JLabel pWText = new JLabel("비밀번호");
 
-        iDText.setBounds(((Frame.WIDTH - 450) / 2 ),(Frame.HEIGHT - 139 - (70 + (93*4))-140) , 500, 400);
-        pWText.setBounds(((Frame.WIDTH - 450) / 2 ),(Frame.HEIGHT - 139 - (70 + (93*3))-90) , 500, 400);
+        iDText.setBounds(((getWidth() - 450) / 2 ),(getHeight() - 139 - (70 + (93*4))-140) , 500, 400);
+        pWText.setBounds(((getWidth() - 450) / 2 ),(getHeight() - 139 - (70 + (93*3))-90) , 500, 400);
 
         iDText.setFont(newFont);
         pWText.setFont(newFont);
@@ -41,21 +41,19 @@ public class login extends Frame {
         add(pWText);
 
         JButton iDButton = new JButton("로그인");
-        iDButton.setBounds((Frame.WIDTH/2) - 225, Frame.HEIGHT - 230, 220, 70);
+        iDButton.setBounds((getWidth()/2) - 225, getHeight() - 230, 220, 70);  // getWidth()와 getHeight()로 수정
         iDButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 String idText = iDTextInput.getText();
                 String pwText = pWTextInput.getText();
                 if (authenticate(idText, pwText)) {
-                    // 로그인 성공 처리
                     JOptionPane.showMessageDialog(null, "로그인 성공");
-                    Frame.ID = idText;
-                    Frame.SCORE = pwText;
+                    // Frame.ID = idText;  // 이 부분 주석 처리
+                    // Frame.SCORE = pwText;  // 이 부분 주석 처리
                     new Main();
                     setVisible(false);
                 } else {
-                    // 로그인 실패 처리
                     JOptionPane.showMessageDialog(null, "로그인 실패");
                 }
             }
@@ -63,7 +61,7 @@ public class login extends Frame {
         add(iDButton);
 
         JButton pWButton = new JButton("회원가입");
-        pWButton.setBounds((Frame.WIDTH/2) + 5, Frame.HEIGHT - 230, 220, 70);
+        pWButton.setBounds((getWidth()/2) + 5, getHeight() - 230, 220, 70);  // getWidth()와 getHeight()로 수정
         pWButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -111,6 +109,6 @@ public class login extends Frame {
     }
 
     public static void main(String[] args) {
-        new login();
+                new login();
     }
 }

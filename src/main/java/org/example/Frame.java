@@ -10,6 +10,7 @@ public class Frame extends JFrame{
     public static int SCORE = 300;
     public static int TEMA = -1;
     public static int ITEM = 0;
+    public static String DDAY = "";
     Image screenImage;
     Graphics screenGraphics;
     JLabel background;

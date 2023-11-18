@@ -13,7 +13,7 @@ public class Main extends Frame {
     public Main(){
         int btn_width = 225;
         int btn_height = 75;
-        background=new JLabel(new ImageIcon(Main.class.getResource("/static/db/img/Main_/back_main.png")));//배경이미지
+        background=new JLabel(new ImageIcon(Main.class.getResource("/static/db/img/Main_/back_main.png")));
         background.setBounds(0, 0, WIDTH, HEIGHT);
         add(background);
 
@@ -23,7 +23,7 @@ public class Main extends Frame {
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                new gameStart();
+                new gameTest();
                 setVisible(false);
             }
         });

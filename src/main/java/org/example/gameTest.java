@@ -11,7 +11,19 @@ public class gameTest extends Frame{
     int expectedIndex = 1;
     //boolean
     boolean on1 = false;
+    boolean on1_2 = false;
     boolean on2 = false;
+    boolean on2_2 = false;
+    boolean on3 = false;
+    boolean on3_2 = false;
+    boolean on4 = false;
+    boolean on4_2 = false;
+    boolean on5 = false;
+    boolean on5_2 = false;
+    boolean on6 = false;
+    boolean on6_2 = true;
+    boolean on7 = false;
+    boolean on7_2 = true;
 
     static int count = 1;
     gameTest(){
@@ -112,51 +124,48 @@ public class gameTest extends Frame{
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 2) {
-                    on1 = !on1; // 현재 값을 반대로 변경 ex) true -> false
-                    label1.setVisible(on1); // 시각적 표현 변경
-                    expectedIndex++;
+                if (expectedIndex == 3) {
+                    on1 = !on1;
+                    label1.setVisible(on1);
                 } else {
-                    on2 = !on2;
-                    label1.setVisible(on2);
+                    label1.setVisible(on1_2);
+
                 }
             }
         });
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 2) {
-                    on1 = !on1;
-                    expectedIndex++;
-                } else {
+                if (expectedIndex == 3) {
                     on2 = !on2;
                     label2.setVisible(on2);
+                } else {
+                    on2_2 = !on2_2;
+                    label2.setVisible(on2_2);
                 }
             }
         });
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 2) {
-                    on1 = !on1;
-                    label3.setVisible(on1);
-                    expectedIndex++;
+                if (expectedIndex == 3) {
+                    on3 = !on3;
+                    label3.setVisible(on3);
                 } else {
-                    on2 = !on2;
-                    label3.setVisible(on2);
+                    on3_2 = !on3_2;
+                    label3.setVisible(on3_2);
                 }
             }
         });
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 2) {
-                    on1 = !on1;
-                    label4.setVisible(on1);
-                    expectedIndex++;
+                if (expectedIndex == 3) {
+                    on4 = !on4;
+                    label4.setVisible(on4);
                 } else {
-                    on2 = !on2;
-                    label4.setVisible(on2);
+                    on4_2 = !on4_2;
+                    label4.setVisible(on4_2);
 //                    handleFailure1(label4);
                 }
             }
@@ -165,12 +174,11 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 3) {
-                    on1 = !on1;
-                    label5.setVisible(on1);
-                    expectedIndex++;
+                    on5 = !on5;
+                    label5.setVisible(on5);
                 } else {
-                    on2 = !on2;
-                    label5.setVisible(on2);
+                    on5_2 = !on5_2;
+                    label5.setVisible(on5_2);
 //                    handleFailure1(label5);
                 }
             }
@@ -179,13 +187,11 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 2) {
-                    on1 = !on1;
-                    labelWasabi.setVisible(on1);
+                    on6 = !on6;
+                    labelWasabi.setVisible(on6);
                     expectedIndex++;
                 } else {
-                    on2 = !on2;
-                    labelWasabi.setVisible(on2);
-                    handleFailure2(labelWasabi);
+                    labelWasabi.setVisible(on6_2);
                 }
             }
         });
@@ -193,13 +199,11 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(expectedIndex == 1){
-                    on1 = !on1;
-                    labelRice.setVisible(on1);
+                    on7 = !on7;
+                    labelRice.setVisible(on7);
                     expectedIndex++;
                 } else {
-                    on2 = !on2;
-                    labelRice.setVisible(on2);
-                    handleFailure2(labelWasabi);
+                    labelRice.setVisible(on7_2);
                 }
             }
         });
@@ -211,9 +215,6 @@ public class gameTest extends Frame{
 //
 //
 //    }
-    private void handleFailure2(JLabel labelWasabi){
-        labelWasabi.setVisible(false);
-    }
     public static void main(String[] args) {
         new gameTest();
     }

@@ -1,25 +1,31 @@
-package org.example;import javax.swing.*;
+package org.example;
+
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Rank extends JFrame {
-    public static void main(String[] args) {
-        new Rank();
-    }
     private Color backColor = Color.ORANGE;
-    // 이미지 버튼에 사용될
-    private JButton nextButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Rank_/nextButton.png")));
-    private JButton startButton2 = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"Rank_/titleButton.png")));
-    private ImageIcon imageIcon = new ImageIcon(Main.class.getResource(Frame.LINK+"Rank_/coin.png"));
+    private JButton nextButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK + "Rank_/nextButton.png")));
+    private JButton startButton2 = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK + "Rank_/titleButton.png")));
+    private ImageIcon imageIcon = new ImageIcon(Main.class.getResource(Frame.LINK + "Rank_/coin.png"));
+    private int count = 0;
+
     public Rank() {
         JPanel padding = new JPanel();
-        padding.setLayout(new GridLayout(2, 1)); // 2개의 행, 1개의 열을 가지는 GridLayout
+        padding.setLayout(null);
         padding.setPreferredSize(new Dimension(100, 100));
         padding.setBackground(backColor);
 
-        nextButton.setBounds(100/2 - 30 , 100/2 - 30,70,70);
+        nextButton.setBounds(100 / 2 - 30, 100 / 2 - 30, 70, 70);
         nextButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -27,82 +33,161 @@ public class Rank extends JFrame {
                 setVisible(false);
             }
         });
-        add(nextButton);
+        padding.add(nextButton);
 
-        startButton2.setBounds(Frame.WIDTH/2 - 520 / 2,100/2 - 30  ,520,70);
+        startButton2.setBounds(Frame.WIDTH / 2 - 520 / 2, 100 / 2 - 30, 520, 70);
         startButton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 new Rank();
-                setVisible(false);
+                setVisible (false);
             }
         });
-        add(startButton2);
+        padding.add(startButton2);
 
         JPanel scrollablePanel = new JPanel();
-        scrollablePanel.setLayout(new GridLayout(0, 1)); // 왼쪽에서 오른쪽으로 배치
-        scrollablePanel.setBackground(backColor); // 배경색을 검정으로
+        scrollablePanel.setLayout(new GridLayout(0, 1));
+        scrollablePanel.setBackground(backColor);
 
         scrollablePanel.add(padding);
-        for (int i = 1; i <= 30; i++) { // 100개의 아이템을 추가하여 스크롤이 필요하도록 함
 
-            JPanel panel = new JPanel();
-            panel.setPreferredSize(new Dimension(100, 100));
-            panel.setBackground(Color.WHITE);
-            JPanel rightPanel = new JPanel();
-            rightPanel.setPreferredSize(new Dimension(250, 100));
-            rightPanel.setBackground(Color.WHITE);
+        try (BufferedReader reader = new BufferedReader(new FileReader("user_database.txt"))) {
+            String line;
+            ArrayList<UserData> userDataList = new ArrayList<>();
 
-        // JPanel 내부에 컴포넌트를 추가하기 위한 BorderLayout 사용
-            panel.setLayout(new BorderLayout());
-            String number = Integer.toString(i);
-            // 서브 패널을 생성하고 서브 패널 내부에 번호와 왼쪽 텍스트를 배치
-            JLabel numberLabel = new JLabel(number);
-            JLabel leftTextLabel = new JLabel("아이디" + number);
-            JLabel rightTextLabel = new JLabel("점수" + number + 010000);
-            JLabel imageLabel = new JLabel(imageIcon);
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 5) {
+                    String username = parts[0];
+                    int score = Integer.parseInt(parts[2]);
 
-            Font labelFont = numberLabel.getFont();
-            numberLabel.setFont(labelFont.deriveFont(30f));
-            leftTextLabel.setFont(labelFont.deriveFont(30f));
-            rightTextLabel.setFont(labelFont.deriveFont(30f));
-            // JLabel 텍스트 가운데 정렬
-            numberLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            rightTextLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+                    userDataList.add(new UserData(username, score));
+                }
+            }
 
-            numberLabel.setPreferredSize(new Dimension(100, numberLabel.getPreferredSize().height));
-            leftTextLabel.setPreferredSize(new Dimension(100, numberLabel.getPreferredSize().height));
+            // Sort the user data list
+            Collections.sort(userDataList);
 
-            rightPanel.add(rightTextLabel, BorderLayout.CENTER);
-            rightPanel.add(imageLabel, BorderLayout.EAST);
+            int maxUsernameLength = getMaxStringLength(userDataList);
+            int previousScore = -1; // 이전 아이디의 점수를 저장할 변수
+            int rank = 0; // 순위를 저장할 변수
 
-            panel.add(numberLabel,BorderLayout.WEST);
-            panel.add(leftTextLabel, BorderLayout.CENTER);
-            panel.add(rightPanel, BorderLayout.EAST);
+            for (int i = 0; i < userDataList.size(); i++) {
+                UserData userData = userDataList.get(i);
+                int currentScore = userData.getScore();
 
-            panel.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createCompoundBorder(),
-                    new LineBorder(backColor, 10) // 검정색 테두리
-            ));
+                if (currentScore != previousScore) {
+                    // 현재 아이디의 점수가 이전 아이디의 점수와 다를 경우 순위를 증가시킴
+                    rank++;
+                }
 
-            scrollablePanel.add(panel);
+                JPanel panel = createRankPanel(userData.getUsername(), String.valueOf(currentScore), maxUsernameLength, rank);
+                scrollablePanel.add(panel);
+
+                previousScore = currentScore; // 이전 아이디의 점수 업데이트
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         JPanel padding2 = new JPanel();
-        padding2.setPreferredSize(new Dimension(100, 30)); // 100x30 크기로 설정
+        padding2.setPreferredSize(new Dimension(100, 30));
         padding2.setBackground(backColor);
         scrollablePanel.add(padding2);
 
-        // 스크롤 가능한 패널을 JScrollPane에 넣습니다.
         JScrollPane scrollPane = new JScrollPane(scrollablePanel);
 
-        // JScrollPane을 프레임에 추가
         add(scrollPane);
 
         setSize(Frame.WIDTH, Frame.HEIGHT);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창을 닫을 때 프로그램 종료
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("원시초밥");
         setLocationRelativeTo(null);
         setVisible(true);
     }
-}
 
+    private JPanel createRankPanel(String username, String score, int maxUsernameLength, int rank) {
+        count++;
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(100, 100));
+        panel.setBackground(Color.WHITE);
+        JPanel rightPanel = new JPanel();
+        rightPanel.setPreferredSize(new Dimension(250, 100));
+        rightPanel.setBackground(Color.WHITE);
+
+        panel.setLayout(new BorderLayout());
+
+        JLabel numberLabel = new JLabel(Integer.toString(rank)); // 순위 출력
+        JLabel leftTextLabel = new JLabel(username);
+        JLabel rightTextLabel = new JLabel(score);
+        JLabel imageLabel = new JLabel(imageIcon);
+
+        Font labelFont = numberLabel.getFont();
+        numberLabel.setFont(labelFont.deriveFont(30f));
+        leftTextLabel.setFont(labelFont.deriveFont(30f));
+        rightTextLabel.setFont(labelFont.deriveFont(30f));
+
+        numberLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        rightTextLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        numberLabel.setPreferredSize(new Dimension(100, numberLabel.getPreferredSize().height));
+
+        int leftLabelWidth = 30 + maxUsernameLength * 15;
+        leftTextLabel.setPreferredSize(new Dimension(leftLabelWidth, numberLabel.getPreferredSize().height));
+
+        rightPanel.add(rightTextLabel, BorderLayout.CENTER);
+        rightPanel.add(imageLabel, BorderLayout.EAST);
+
+        panel.add(numberLabel, BorderLayout.WEST);
+        panel.add(leftTextLabel, BorderLayout.CENTER);
+        panel.add(rightPanel, BorderLayout.EAST);
+
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createCompoundBorder(),
+                new LineBorder(backColor, 10)
+        ));
+
+        return panel;
+    }
+
+    private int getMaxStringLength(List<UserData> userDataList) {
+        int maxLength = 0;
+        for (UserData userData : userDataList) {
+            String username = userData.getUsername();
+            if (username.length() > maxLength) {
+                maxLength = username.length();
+            }
+        }
+        return maxLength;
+    }
+
+    public static void main(String[] args) {
+        new Rank();
+    }
+
+    // UserData class
+    private static class UserData implements Comparable<UserData> {
+        private String username;
+        private int score;
+
+        public UserData(String username, int score) {
+            this.username = username;
+            this.score = score;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        @Override
+        public int compareTo(UserData other) {
+            // Compare by score in descending order
+            return Integer.compare(other.getScore(), this.score);
+        }
+    }
+}

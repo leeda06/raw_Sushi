@@ -6,6 +6,11 @@ public class Frame extends JFrame{
     public static final int WIDTH = 1080;
     public static final int HEIGHT = 720;
     public static final String LINK = "/static/db/img/";
+    public static String ID = "";
+    public static int SCORE = 300;
+    public static int TEMA = -1;
+    public static int ITEM = 0;
+    public static String DDAY = "";
     Image screenImage;
     Graphics screenGraphics;
     JLabel background;
@@ -20,6 +25,7 @@ public class Frame extends JFrame{
         setVisible(true);   // 창보이게
         background=null;//배경이미지
     }
+
     public void paint(Graphics g) {//그리는 함수
         screenImage = createImage(Frame.WIDTH, Frame.HEIGHT);
         screenGraphics = screenImage.getGraphics();

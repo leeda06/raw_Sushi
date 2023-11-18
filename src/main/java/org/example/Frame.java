@@ -6,8 +6,10 @@ public class Frame extends JFrame{
     public static final int WIDTH = 1080;
     public static final int HEIGHT = 720;
     public static final String LINK = "/static/db/img/";
-    public static final String ID = "";
-    public static String SCORE = "";
+    public static String ID = "";
+    public static int SCORE = 300;
+    public static int TEMA = -1;
+    public static int ITEM = 0;
     Image screenImage;
     Graphics screenGraphics;
     JLabel background;

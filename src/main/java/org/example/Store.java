@@ -1,13 +1,10 @@
 package org.example;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 class Item {
     private String name;
@@ -44,31 +41,20 @@ public class Store extends Frame {
     private int currentPage;
     private int itemsPerPage = 3;
     private int items_turn = 0;
-    int toPingpart = 0;
-    int temaPart = -1;
     public Store() {
 
         Item[][] items1 = {{
-                new Item("계란", "potion.png", 10,0),
-                new Item("연어", "armor.png", 50,1),
-                new Item("참치", "sword.png", 30,2),
-                new Item("광어", "potion.png", 12,3),
-                new Item("고등어", "armor.png", 53,4),
-                new Item("마끼", "sword.png", 33,5)
+                new Item("계란", "계란.png", 10,0),
+                new Item("연어", "연어.png", 20,1),
+                new Item("새우", "새우.png", 30,2),
+                new Item("광어", "광어.png", 40,3),
+                new Item("참치", "참치.png", 50,4),
+                new Item("오징어", "오징어.png", 60,5)
                 // Add more items
         },{
-                new Item("코스튬1", "potion.png", 10,0),
-                new Item("코스튬2", "armor.png", 50,1),
-                new Item("코스튬3", "sword.png", 30,2),
-                new Item("코스튬4", "potion.png", 12,3),
-                new Item("코스튬5", "armor.png", 53,4),
-                new Item("코스튬6", "sword.png", 33,5),
-                new Item("코스튬7", "armor.png", 53,6),
-                new Item("코스튬8", "sword.png", 33,7),
-                new Item("코스튬9", "armor.png", 53,8),
-                new Item("코스튬10", "sword.png", 33,9),
-                new Item("코스튬11", "sword.png", 33,10),
-                new Item("코스튬12", "shield.png", 55,11) // Fixed the image for the last item
+                new Item("기본테마", "기본테마.png", 0,0),
+                new Item("기본테마", "기본테마.png", 50,1),
+                new Item("기본테마", "기본테마.png", 30,2)
                 // Add more items
         }};
 
@@ -78,10 +64,22 @@ public class Store extends Frame {
 
         background.setLayout(new BorderLayout());
 
+        // Uncomment the nextButton-related code
+        JButton nextButton = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK + "Store_/nextBtn.png")));
+        nextButton.setBounds(700, 210, 30, 30);  // Set the bounds with specific coordinates and size
+        nextButton.setBackground(new Color(255,255,255, 0));
+        nextButton.setBorder(new EmptyBorder(0, 0, 0, 0));
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nextPage(items1[items_turn]);
+            }
+        });
+
         // Left panel (size ratio 2)
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.setPreferredSize(new Dimension(297, 300));
-        JLabel leftLabel = new JLabel("왼쪽 라벨");
+        JLabel leftLabel = new JLabel(" ");
         leftLabel.setOpaque(true);
         leftLabel.setBackground(new Color(0, 0, 0, 0));
 
@@ -92,6 +90,7 @@ public class Store extends Frame {
             public void actionPerformed(ActionEvent e) {
                 items_turn = 0;
                 currentPage = 0;
+                nextButton.setVisible(true);
                 nextPage(items1[items_turn]);
             }
         });
@@ -103,13 +102,25 @@ public class Store extends Frame {
             public void actionPerformed(ActionEvent e) {
                 items_turn = 1;
                 currentPage = 0;
+                nextButton.setVisible(false);
                 nextPage(items1[items_turn]);
+            }
+        });
+
+        JButton frameBtn = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK + "Store_/돌아가기Btn.png")));
+        frameBtn.setBounds(30,560,222, 90);
+        frameBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Main();
+                setVisible(false);
             }
         });
 
         leftPanel.add(leftLabel, BorderLayout.CENTER);
         leftLabel.add(items1Btn);
         leftLabel.add(items2Btn);
+        leftLabel.add(frameBtn);
         background.add(leftPanel, BorderLayout.CENTER);
 
         // Right panel (size ratio 8)
@@ -128,6 +139,7 @@ public class Store extends Frame {
 
         itemsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         itemsPanel.setBackground(new Color(0, 0, 0, 0));
+        itemsPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         for (int i = 0; i < itemsPerPage && i < items1.length; i++) {
             itemsPanel.add(createItemPanel(items1[items_turn][i]));
@@ -135,23 +147,18 @@ public class Store extends Frame {
 
         JScrollPane scrollPane = new JScrollPane(itemsPanel);
         scrollPane.setBackground(new Color(0, 0, 0, 0));
+        scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        // Uncomment the nextButton-related code
-        JButton nextButton = new JButton("다음 페이지");
-        nextButton.setBounds(700, 210, 30, 30);  // Set the bounds with specific coordinates and size
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    nextPage(items1[items_turn]);
-            }
-        });
 
-        JLabel Bottom = new JLabel(" ");
+
+        JLabel Bottom = new JLabel("");
         rightPanel.add(nextButton, FlowLayout.LEFT);
         rightPanel.add(Bottom, FlowLayout.LEFT);
         topRightLabel.add(scrollPane, BorderLayout.CENTER);
 
+
         nextPage(items1[items_turn]);
+
 
     }
 
@@ -181,39 +188,41 @@ public class Store extends Frame {
     private JPanel createItemPanel(Item item) {
         JPanel panel = new JPanel(new BorderLayout());
 
-        JLabel nameLabel = new JLabel("이름: " + item.getName());
-        JLabel priceLabel = new JLabel("가격: " + item.getPrice());
-        JButton buyButton = new JButton("구매하기");
-        buyButton.setPreferredSize(new Dimension(195, 300));
+        JButton buyButton = new JButton( new ImageIcon(Main.class.getResource(Frame.LINK+"Store_/ingredient/img"+item.getImage())));
+        buyButton.setPreferredSize(new Dimension(195, 320));
+
+        buyButton.setBorder(new EmptyBorder(0, 0, 0, 0));
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (items_turn == 0){
-                    if(toPingpart == item.getIndex()){
-                    JOptionPane.showMessageDialog(null, "구매 완료: " + item.getName());
-                        toPingpart = toPingpart + 1;
-                    } else if(toPingpart > item.getIndex()){
-                        JOptionPane.showMessageDialog(null, "이미 구매하신 아이템 입니다.");
-                    }else {
-                        JOptionPane.showMessageDialog(null, "먼저 이전 아이템을 구매하세요.");
-                    }
-                } else if (items_turn == 1){
-                    if(temaPart != item.getIndex()){
-                        JOptionPane.showMessageDialog(null, "일회용입니다. 주의하세요.\n구매 완료: " + item.getName());
-                        temaPart = item.getIndex();
+                if(Frame.SCORE >= item.getPrice()) {
+                    if (items_turn == 0) {
+                        if (Frame.ITEM == item.getIndex()) {
+                            JOptionPane.showMessageDialog(null, "구매 완료: " + item.getName());
+                            Frame.ITEM = Frame.ITEM + 1;
+                        } else if (Frame.ITEM > item.getIndex()) {
+                            JOptionPane.showMessageDialog(null, "이미 구매하신 아이템 입니다.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "먼저 이전 아이템을 구매하세요.");
+                        }
+                    } else if (items_turn == 1) {
+                        if (Frame.ITEM != item.getIndex()) {
+                            JOptionPane.showMessageDialog(null, "일회용입니다.\n구매 완료: " + item.getName());
+                            Frame.ITEM = item.getIndex();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "이미 구매하신 아이템 입니다.");
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "이미 구매하신 아이템 입니다.");
+                        JOptionPane.showMessageDialog(null, "구매 완료: " + item.getName());
                     }
-                }else {
-                    JOptionPane.showMessageDialog(null, "구매 완료: " + item.getName());
+                }else{
+                    JOptionPane.showMessageDialog(null, "돈 부족!!\n현 잔액 : " + Frame.SCORE);
                 }
             }
         });
 
         JLabel imageLabel = new JLabel(item.getImage());
         panel.add(imageLabel, BorderLayout.CENTER);
-        panel.add(priceLabel, BorderLayout.SOUTH);
-        panel.add(nameLabel);
         panel.add(buyButton, BorderLayout.NORTH);
 
         return panel;

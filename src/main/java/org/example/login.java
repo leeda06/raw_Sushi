@@ -49,8 +49,7 @@ public class login extends Frame {  // JFrame을 상속받도록 수정
                 String pwText = pWTextInput.getText();
                 if (authenticate(idText, pwText)) {
                     JOptionPane.showMessageDialog(null, "로그인 성공");
-                    // Frame.ID = idText;  // 이 부분 주석 처리
-                    // Frame.SCORE = pwText;  // 이 부분 주석 처리
+                     Frame.ID = idText;
                     new Main();
                     setVisible(false);
                 } else {
@@ -82,7 +81,10 @@ public class login extends Frame {  // JFrame을 상속받도록 수정
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 2 && parts[0].equals(username) && parts[1].equals(password)) {
+                if (parts[0].equals(username) && parts[1].equals(password)) {
+                    Frame.TEMA = Integer.parseInt(parts[4]);
+                    Frame.ITEM = Integer.parseInt(parts[3]);
+                    Frame.SCORE = Integer.parseInt(parts[2]);
                     return true;
                 }
             }
@@ -97,7 +99,7 @@ public class login extends Frame {  // JFrame을 상속받도록 수정
             if (idList.contains(username)) {
                 return false; // 이미 존재하는 아이디
             } else {
-                writer.write(username + "," + password);
+                writer.write(username + "," + password + "," + 0 + "," + 0 + "," + -1); // 아이디, 비번, 점수, 토핑, 테마
                 writer.newLine();
                 idList.add(username);
                 return true;

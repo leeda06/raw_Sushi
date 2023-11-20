@@ -82,7 +82,7 @@ public class Main extends Frame {
 //                setVisible(false);
             }
         });
-        rewordButton.setBounds(WIDTH - 60 - btn_width ,40, btn_width , btn_height);
+        rewordButton.setBounds(40,40, btn_width , btn_height);
         background.add(rewordButton);
         rewordButton.addMouseListener(new MouseAdapter() {
             @Override

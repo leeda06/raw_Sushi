@@ -57,9 +57,9 @@ public class Rank extends JFrame {
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 5) {
+                if (parts.length == 8) {
                     String username = parts[0];
-                    int score = Integer.parseInt(parts[2]);
+                    int score = Integer.parseInt(parts[7]);
 
                     userDataList.add(new UserData(username, score));
                 }

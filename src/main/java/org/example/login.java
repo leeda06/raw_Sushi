@@ -119,7 +119,7 @@ public class login extends Frame {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String yesterdayString = yesterday.format(formatter);
 
-                writer.write(username + "," + password + "," + 0 + "," + 0 + "," + -1 + "," + yesterdayString + "," + 5);
+                writer.write(username + "," + password + "," + 20 + "," + 0 + "," + -1 + "," + yesterdayString + "," + 5 + "," + 0);
                 writer.newLine();
 
                 idList.add(username);

@@ -1,12 +1,13 @@
 package org.example;
 
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class gameTest extends Frame{
+public class text extends Frame{
     int expectedIndex = 1;
     //boolean
     boolean on1 = false;
@@ -26,6 +27,7 @@ public class gameTest extends Frame{
     boolean on8 = false;
     boolean on8_2 = true;
 
+    static int count = 1;
 
     private ImageIcon icon1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients1.png"));
     private ImageIcon icon2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients2.png"));
@@ -78,20 +80,22 @@ public class gameTest extends Frame{
     private JLabel labelOrder1 = new JLabel(iconOrder1);
     private JLabel labelThankyou = new JLabel(iconThankyou);
     private JLabel labelSky = new JLabel(iconSky);
-    gameTest(){
+    text(){
         setLayout(null);
 
-//        int delay = 40000;
+
 //        Timer m_timer = new Timer();
-//        TimerTask m_task = new TimerTask(delay, new ActionListener() {
+//        TimerTask m_task = new TimerTask() {
 //            @Override
 //            public void run() {
-//
+//                if(count <= 3){
+//                    count++;
+//                } else {
+//                    m_timer.cancel();
+//                }
 //            }
-//        }) {
-//
 //        };
-//    m_timer.schedule(m_task, 1000, 1000);
+//        m_timer.schedule(m_task, 1000, 1000);
 
         JButton button1 = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"GameStart_/sushiTong1.jpg")));
         button1.setBounds(180, 350, 120, 120);

@@ -30,6 +30,58 @@ public class gameTest extends Frame{
     boolean on8_2 = true;
 
     static int count = 1;
+
+    private ImageIcon icon1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients1.png"));
+    private ImageIcon icon2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients2.png"));
+    private ImageIcon icon3 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients3.png"));
+    private ImageIcon icon4 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients4.png"));
+    private ImageIcon icon5 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients5.png"));
+    private ImageIcon icon6 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients6.png"));
+    private ImageIcon sushi1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image1.jpg"));
+    private ImageIcon sushi2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image2.jpg"));
+    private ImageIcon sushi3 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image3.jpg"));
+    private ImageIcon sushi4 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image4.jpg"));
+    private ImageIcon sushi5 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image5.jpg"));
+    private ImageIcon sushi6 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image6.jpg"));
+    private ImageIcon iconWasabi = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/wasabi.png"));
+    private ImageIcon iconRice = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/rice.png"));
+    private ImageIcon iconDoma = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/doma.jpg"));
+    private ImageIcon iconDish1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/dish1.jpg"));
+    private ImageIcon iconDish2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/dish2.jpg"));
+    private ImageIcon iconWood1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/wood1.png"));
+    private ImageIcon iconWood2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/wood2.png"));
+    private ImageIcon iconCustomer1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/customer1.jpg"));
+    private ImageIcon iconCustomer2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/customer2.jpg"));
+    private ImageIcon iconCustomer3 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/customer3.jpg"));
+    private ImageIcon iconOrder1 = new ImageIcon((Main.class.getResource(LINK+"/GameStart_/order1.png")));
+    private ImageIcon iconThankyou = new ImageIcon((Main.class.getResource(LINK+"/GameStart_/thankyou.png")));
+    private ImageIcon iconSky = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/sky.png"));
+    //이미지 삽입
+    private JLabel label1 = new JLabel(icon1);
+    private JLabel label2 = new JLabel(icon2);
+    private JLabel label3 = new JLabel(icon3);
+    private JLabel label4 = new JLabel(icon4);
+    private JLabel label5 = new JLabel(icon5);
+    private JLabel label6 = new JLabel(icon6);
+    private JLabel labelSushi1 = new JLabel(sushi1);
+    private JLabel labelSushi2 = new JLabel(sushi2);
+    private JLabel labelSushi3 = new JLabel(sushi3);
+    private JLabel labelSushi4 = new JLabel(sushi4);
+    private JLabel labelSushi5 = new JLabel(sushi5);
+    private JLabel labelSushi6 = new JLabel(sushi6);
+    private JLabel labelWasabi = new JLabel(iconWasabi);
+    private JLabel labelRice = new JLabel(iconRice);
+    private JLabel labelDoma = new JLabel(iconDoma);
+    private JLabel labelDish1 = new JLabel(iconDish1);
+    private JLabel labelDish2 = new JLabel(iconDish2);
+    private JLabel labelWood1 = new JLabel(iconWood1);
+    private JLabel labelWood2 = new JLabel(iconWood2);
+    private JLabel labelCustomer1 = new JLabel(iconCustomer1);
+    private JLabel labelCustomer2 = new JLabel(iconCustomer2);
+    private JLabel labelCustomer3 = new JLabel(iconCustomer3);
+    private JLabel labelOrder1 = new JLabel(iconOrder1);
+    private JLabel labelThankyou = new JLabel(iconThankyou);
+    private JLabel labelSky = new JLabel(iconSky);
     gameTest(){
         setLayout(null);
 
@@ -76,57 +128,7 @@ public class gameTest extends Frame{
         add(clear);
 
         // 이미지 아이콘
-        ImageIcon icon1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients1.png"));
-        ImageIcon icon2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients2.png"));
-        ImageIcon icon3 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients3.png"));
-        ImageIcon icon4 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients4.png"));
-        ImageIcon icon5 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients5.png"));
-        ImageIcon icon6 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients6.png"));
-        ImageIcon sushi1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image1.jpg"));
-        ImageIcon sushi2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image2.jpg"));
-        ImageIcon sushi3 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image3.jpg"));
-        ImageIcon sushi4 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image4.jpg"));
-        ImageIcon sushi5 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image5.jpg"));
-        ImageIcon sushi6 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/image6.jpg"));
-        ImageIcon iconWasabi = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/wasabi.png"));
-        ImageIcon iconRice = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/rice.png"));
-        ImageIcon iconDoma = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/doma.jpg"));
-        ImageIcon iconDish1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/dish1.jpg"));
-        ImageIcon iconDish2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/dish2.jpg"));
-        ImageIcon iconWood1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/wood1.png"));
-        ImageIcon iconWood2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/wood2.png"));
-        ImageIcon iconCustomer1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/customer1.jpg"));
-        ImageIcon iconCustomer2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/customer2.jpg"));
-        ImageIcon iconCustomer3 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/customer3.jpg"));
-        ImageIcon iconOrder1 = new ImageIcon((Main.class.getResource(LINK+"/GameStart_/order1.png")));
-        ImageIcon iconThankyou = new ImageIcon((Main.class.getResource(LINK+"/GameStart_/thankyou.png")));
-        ImageIcon iconSky = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/sky.png"));
-        //이미지 삽입
-        JLabel label1 = new JLabel(icon1);
-        JLabel label2 = new JLabel(icon2);
-        JLabel label3 = new JLabel(icon3);
-        JLabel label4 = new JLabel(icon4);
-        JLabel label5 = new JLabel(icon5);
-        JLabel label6 = new JLabel(icon6);
-        JLabel labelSushi1 = new JLabel(sushi1);
-        JLabel labelSushi2 = new JLabel(sushi2);
-        JLabel labelSushi3 = new JLabel(sushi3);
-        JLabel labelSushi4 = new JLabel(sushi4);
-        JLabel labelSushi5 = new JLabel(sushi5);
-        JLabel labelSushi6 = new JLabel(sushi6);
-        JLabel labelWasabi = new JLabel(iconWasabi);
-        JLabel labelRice = new JLabel(iconRice);
-        JLabel labelDoma = new JLabel(iconDoma);
-        JLabel labelDish1 = new JLabel(iconDish1);
-        JLabel labelDish2 = new JLabel(iconDish2);
-        JLabel labelWood1 = new JLabel(iconWood1);
-        JLabel labelWood2 = new JLabel(iconWood2);
-        JLabel labelCustomer1 = new JLabel(iconCustomer1);
-        JLabel labelCustomer2 = new JLabel(iconCustomer2);
-        JLabel labelCustomer3 = new JLabel(iconCustomer3);
-        JLabel labelOrder1 = new JLabel(iconOrder1);
-        JLabel labelThankyou = new JLabel(iconThankyou);
-        JLabel labelSky = new JLabel(iconSky);
+
 
         label1.setVisible(false);
         label2.setVisible(false);
@@ -286,8 +288,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 3) {
-                    on1 = !on1;
-                    label1.setVisible(on1);
+                    imgVisible(1);
                 } else {
                     label1.setVisible(on1_2);
 
@@ -298,8 +299,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 3) {
-                    on2 = !on2;
-                    label2.setVisible(on2);
+                    imgVisible(2);
                 } else {
                     label2.setVisible(on2_2);
                 }
@@ -309,8 +309,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 3) {
-                    on3 = !on3;
-                    label3.setVisible(on3);
+                    imgVisible(3);
                 } else {
                     label3.setVisible(on3_2);
                 }
@@ -320,8 +319,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 3) {
-                    on4 = !on4;
-                    label4.setVisible(on4);
+                    imgVisible(4);
                 } else {
                     label4.setVisible(on4_2);
                 }
@@ -331,8 +329,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 3) {
-                    on5 = !on5;
-                    label5.setVisible(on5);
+                    imgVisible(5);
                 } else {
                     label5.setVisible(on5_2);
                 }
@@ -342,8 +339,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 3) {
-                    on6 = !on6;
-                    label6.setVisible(on6);
+                    imgVisible(6);
                 } else {
                     label6.setVisible(on6_2);
                 }
@@ -354,8 +350,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (expectedIndex == 2) {
-                    on7 = !on7;
-                    labelWasabi.setVisible(on7);
+                    imgVisible(7);
                     expectedIndex++;
                 } else {
                     labelWasabi.setVisible(on7_2);
@@ -366,8 +361,7 @@ public class gameTest extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(expectedIndex == 1){
-                    on8 = !on8;
-                    labelRice.setVisible(on8);
+                    imgVisible(8);
                     expectedIndex++;
                 } else {
                     labelRice.setVisible(on8_2);
@@ -378,6 +372,31 @@ public class gameTest extends Frame{
 
     }
 
+    private void imgVisible(int number){
+        boolean imgNumber[] = {false,false,false,false,false,false,false,false};
+        for (int i = 0; i < imgNumber.length;i++){
+            if(i == number - 1 || (i == 6 && on7 == true) || (i == 7 && on8 == true)){
+                imgNumber[i] = true;
+            }
+        }
+        on1 = imgNumber[0];
+        on2 = imgNumber[1];
+        on3 = imgNumber[2];
+        on4 = imgNumber[3];
+        on5 = imgNumber[4];
+        on6 = imgNumber[5];
+        on7 = imgNumber[6];
+        on8 = imgNumber[7];
+
+        label1.setVisible(on1);
+        label2.setVisible(on2);
+        label3.setVisible(on3);
+        label4.setVisible(on4);
+        label5.setVisible(on5);
+        label6.setVisible(on6);
+        labelWasabi.setVisible(on7);
+        labelRice.setVisible(on8);
+    }
     public static void main(String[] args) {
         new gameTest();
     }

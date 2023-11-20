@@ -127,7 +127,6 @@ public class FireworkSimulator extends JFrame {
     JLabel background;
     public FireworkSimulator() {
         setSize(WIDTH, HEIGHT); // 창 크기 설정
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창을 닫을 때 프로그램 종료
         setTitle("원시초밥");
         setVisible(true);   // 창보이게
         background=null;//배경이미지

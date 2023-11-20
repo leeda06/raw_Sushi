@@ -244,7 +244,7 @@ public class Store extends Frame {
         return panel;
     }
 
-    public static void updateScoreById(String filePath) throws IOException {
+    private static void updateScoreById(String filePath) throws IOException {
         Path path = Paths.get(filePath);
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 

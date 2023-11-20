@@ -4,12 +4,21 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class Main extends Frame {
     private JButton startButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/startButton .png")));
     private JButton ExButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/ExButton.png")));
     private JButton rankButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/rankButton.png")));
     private JButton logOutButton = new JButton(new ImageIcon(Main.class.getResource(LINK+"Main_/logOutButton.png")));
+   private  JButton partButton = new JButton("파티클 버튼");
+   private  JButton rewordButton = new JButton("일일보상 버튼");
+
     public Main(){
         int btn_width = 225;
         int btn_height = 75;
@@ -23,7 +32,13 @@ public class Main extends Frame {
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                new gameTest();
+                try {
+                    if(IDCount("user_database.txt")){
+                        new gameTest();
+                    }
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 setVisible(false);
             }
         });
@@ -33,7 +48,7 @@ public class Main extends Frame {
         ExButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                new ExampleGame();
+                new Store();
                 setVisible(false);
             }
         });
@@ -57,8 +72,50 @@ public class Main extends Frame {
                 setVisible(false);
             }
         });
-    }
 
+        partButton.setBounds(WIDTH - 60 - btn_width , HEIGHT - (90 + btn_height * 3), btn_width , btn_height);
+        background.add(partButton);
+        partButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                new FireworkSimulator();
+//                setVisible(false);
+            }
+        });
+        rewordButton.setBounds(WIDTH - 60 - btn_width ,40, btn_width , btn_height);
+        background.add(rewordButton);
+        rewordButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                new DailyRewardApp().setVisible(true);
+            }
+        });
+    }
+    private static boolean IDCount(String filePath) throws IOException {
+        Path path = Paths.get(filePath);
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+            String[] columns = line.split(",");
+
+            // 가정: 각 열의 순서가 아이디, 비밀번호, 점수, 토핑 단계, 테마 번호, 날짜, 목숨 순서라고 가정
+            String id = columns[0].trim(); // 아이디 추출
+
+            if (id.equals(Frame.ID) && Integer.valueOf(columns[6]) > 0) {
+                Frame.COUNT -= 1;
+                columns[6] = String.valueOf(Frame.COUNT);
+                // 변경된 열을 다시 문자열로 조합
+                String updatedLine = String.join(",", columns);
+                // 리스트에서 해당 라인을 업데이트
+                lines.set(i, updatedLine);
+                Files.write(path, lines, StandardCharsets.UTF_8);
+                return true;
+            }
+        }
+        Files.write(path, lines, StandardCharsets.UTF_8);
+        return false;
+    }
     public static void main(String[] args) {
         new Main();
     }

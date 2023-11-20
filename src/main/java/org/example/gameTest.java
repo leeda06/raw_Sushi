@@ -29,7 +29,6 @@ public class gameTest extends Frame{
     boolean on8 = false;
     boolean on8_2 = true;
 
-    static int count = 1;
 
     private ImageIcon icon1 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients1.png"));
     private ImageIcon icon2 = new ImageIcon(Main.class.getResource(LINK+"/GameStart_/ingredients2.png"));
@@ -85,19 +84,17 @@ public class gameTest extends Frame{
     gameTest(){
         setLayout(null);
 
-
+//        int delay = 40000;
 //        Timer m_timer = new Timer();
-//        TimerTask m_task = new TimerTask() {
+//        TimerTask m_task = new TimerTask(delay, new ActionListener() {
 //            @Override
 //            public void run() {
-//                if(count <= 3){
-//                    count++;
-//                } else {
-//                    m_timer.cancel();
-//                }
+//
 //            }
+//        }) {
+//
 //        };
-//        m_timer.schedule(m_task, 1000, 1000);
+//    m_timer.schedule(m_task, 1000, 1000);
 
         JButton button1 = new JButton(new ImageIcon(Main.class.getResource(Frame.LINK+"GameStart_/sushiTong1.jpg")));
         button1.setBounds(180, 350, 120, 120);

@@ -5,6 +5,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 class Item {
     private String name;
@@ -53,8 +59,8 @@ public class Store extends Frame {
                 // Add more items
         },{
                 new Item("기본테마", "기본테마.png", 0,0),
-                new Item("기본테마", "기본테마.png", 50,1),
-                new Item("기본테마", "기본테마.png", 30,2)
+                new Item("기본테마", "기본테마.png", 0,1),
+                new Item("기본테마", "기본테마.png", 0,2)
                 // Add more items
         }};
 
@@ -200,23 +206,33 @@ public class Store extends Frame {
                         if (Frame.ITEM == item.getIndex()) {
                             JOptionPane.showMessageDialog(null, "구매 완료: " + item.getName());
                             Frame.ITEM = Frame.ITEM + 1;
+                            Frame.SCORE -= item.getPrice();
                         } else if (Frame.ITEM > item.getIndex()) {
                             JOptionPane.showMessageDialog(null, "이미 구매하신 아이템 입니다.");
                         } else {
                             JOptionPane.showMessageDialog(null, "먼저 이전 아이템을 구매하세요.");
                         }
                     } else if (items_turn == 1) {
-                        if (Frame.ITEM != item.getIndex()) {
+                        if (Frame.TEMA != item.getIndex()) {
                             JOptionPane.showMessageDialog(null, "일회용입니다.\n구매 완료: " + item.getName());
-                            Frame.ITEM = item.getIndex();
+                            Frame.TEMA = item.getIndex();
+                            Frame.SCORE -= item.getPrice();
                         } else {
                             JOptionPane.showMessageDialog(null, "이미 구매하신 아이템 입니다.");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "구매 완료: " + item.getName());
+
+                        Frame.SCORE -= item.getPrice();
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "돈 부족!!\n현 잔액 : " + Frame.SCORE);
+                }
+
+                try {
+                    updateScoreById("user_database.txt");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
@@ -226,6 +242,77 @@ public class Store extends Frame {
         panel.add(buyButton, BorderLayout.NORTH);
 
         return panel;
+    }
+
+    private static void updateScoreById(String filePath) throws IOException {
+        Path path = Paths.get(filePath);
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+            String[] columns = line.split(",");
+
+            // 가정: 각 열의 순서가 아이디, 비밀번호, 점수, 토핑 단계, 테마 번호, 날짜, 목숨 순서라고 가정
+            String id = columns[0].trim(); // 아이디 추출
+
+            if (id.equals(Frame.ID)) {
+                // 아이디가 일치하는 경우 점수 열을 변경
+                columns[2] = String.valueOf(Frame.SCORE);
+                columns[3] = String.valueOf(Frame.ITEM);
+                columns[4] = String.valueOf(Frame.TEMA);
+                // 변경된 열을 다시 문자열로 조합
+                String updatedLine = String.join(",", columns);
+                // 리스트에서 해당 라인을 업데이트
+                lines.set(i, updatedLine);
+                break; // 이미 찾았으므로 루프 종료
+            }
+        }
+
+        // 변경된 내용을 파일에 쓰기
+        Files.write(path, lines, StandardCharsets.UTF_8);
+    }
+
+    private void modifyScoreInFile(String filePath, String targetId, int newScore) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
+             BufferedWriter writer = new BufferedWriter(new FileWriter("임시파일.txt"))) {
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // 각 라인을 아이디와 점수로 분리
+                String[] parts = line.split(",");
+                    String id = parts[0].trim();
+                    int score = Integer.parseInt(parts[2].trim());
+
+                    // 특정 아이디를 찾아 점수 변경
+                    if (id.equals(targetId)) {
+                        score = newScore;
+                    }
+
+                    // 변경된 내용을 쓰기
+                    writer.write(id + ", " + score);
+                    writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 원본 파일 삭제 및 임시 파일을 원본 파일로 변경
+        File originalFile = new File(filePath);
+        File tempFile = new File("임시파일.txt");
+
+        if (tempFile.renameTo(originalFile)) {
+            System.out.println("점수 수정 완료.");
+        } else {
+            System.out.println("점수 수정 실패.");
+        }
+    }
+
+    private void modifyScoreById(String targetId, int newScore) {
+        // 사용할 파일 경로를 설정
+        String filePath = "user_database.txt"; // 실제 파일 경로로 변경
+
+        // 파일에서 특정 아이디의 점수를 변경
+        modifyScoreInFile(filePath, targetId, newScore);
     }
 
     public static void main(String[] args) {

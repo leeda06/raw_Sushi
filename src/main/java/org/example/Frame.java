@@ -7,9 +7,10 @@ public class Frame extends JFrame{
     public static final int HEIGHT = 720;
     public static final String LINK = "/static/db/img/";
     public static String ID = "";
-    public static int SCORE = 300;
+    public static int SCORE = 0;
     public static int TEMA = -1;
     public static int ITEM = 0;
+    public static int COUNT = 5;
     public static String DDAY = "";
     Image screenImage;
     Graphics screenGraphics;

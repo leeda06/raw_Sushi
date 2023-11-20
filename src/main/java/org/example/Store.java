@@ -118,7 +118,7 @@ public class Store extends Frame {
         frameBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Main();
+                new RandomImageLabelGUI();
                 setVisible(false);
             }
         });
@@ -305,6 +305,21 @@ public class Store extends Frame {
         } else {
             System.out.println("점수 수정 실패.");
         }
+
+        int delayInSeconds = 60; // 60 seconds
+        int delayInMillis = delayInSeconds * 1000;
+
+        Timer timer = new Timer();
+        timer.clone(new TimerTask() {
+            @Override
+            public void run() {
+                // Switch to the Main class after the specified delay
+                SwingUtilities.invokeLater(() -> {
+                    new Main();
+                    dispose(); // Close the current Store frame
+                });
+            }
+        }, delayInMillis);
     }
 
     private void modifyScoreById(String targetId, int newScore) {

@@ -5,8 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.TimerTask;
 
-public class gameTest extends Frame{
+public class RandomImageLabelGUI extends Frame{
     int expectedIndex = 1;
     //boolean
     boolean on1 = false;
@@ -79,7 +86,9 @@ public class gameTest extends Frame{
     private JLabel labelOrder1 = new JLabel(iconOrder1);
     private JLabel labelThankyou = new JLabel(iconThankyou);
     private JLabel labelSky = new JLabel(iconSky);
-    gameTest(){
+
+    private int Nm = 0;
+    RandomImageLabelGUI(){
         setLayout(null);
 
 
@@ -197,14 +206,39 @@ public class gameTest extends Frame{
         add(labelThankyou);
         add(labelSky);
 
+
+
         labelOrder1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                labelSushi6.setVisible(false);
                 labelOrder1.setVisible(false);
+                if(count == 6) {
+                    Frame.SCORE += 10;
+                    try {
+                        updateScoreById("user_database.txt");
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
                 labelThankyou.setVisible(true);
+                labelSushi6.setVisible(false);
+
+                Timer timer = new Timer(3000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent arg0) {
+                        // 타이머가 호출될 때 실행할 코드
+                        labelOrder1.setVisible(true);
+                        labelThankyou.setVisible(false);
+                    }
+                });
+
+                timer.setRepeats(false); // Make the timer only fire once
+                timer.start();
+
+                resetSushi();
             }
         });
+
 
         clear.addActionListener(new ActionListener() {
             @Override
@@ -219,6 +253,8 @@ public class gameTest extends Frame{
                     on1 = !on1;
                     on7 = !on7;
                     on8 = !on8;
+                    count = 1;
+
                 } else if(on2 == true && on7 == true && on8 == true) {
                     label2.setVisible(false);
                     labelWasabi.setVisible(false);
@@ -229,6 +265,7 @@ public class gameTest extends Frame{
                     on2 = !on2;
                     on7 = !on7;
                     on8 = !on8;
+                    count = 2;
                 } else if(on3 == true && on7 == true && on8 == true) {
                     label3.setVisible(false);
                     labelWasabi.setVisible(false);
@@ -239,6 +276,7 @@ public class gameTest extends Frame{
                     on3 = !on3;
                     on7 = !on7;
                     on8 = !on8;
+                    count = 3;
                 } else if(on4 == true && on7 == true && on8 == true) {
                     on6 = !on6;
                     on7 = !on7;
@@ -251,6 +289,7 @@ public class gameTest extends Frame{
                     on4 = !on4;
                     on7 = !on7;
                     on8 = !on8;
+                    count = 4;
                 } else if(on5 == true && on7 == true && on8 == true) {
                     on6 = !on6;
                     on7 = !on7;
@@ -263,6 +302,7 @@ public class gameTest extends Frame{
                     on5 = !on5;
                     on7 = !on7;
                     on8 = !on8;
+                    count = 5;
                 } else if(on6 == true && on7 == true && on8 == true) {
                     on6 = !on6;
                     on7 = !on7;
@@ -275,13 +315,14 @@ public class gameTest extends Frame{
                     on6 = !on6;
                     on7 = !on7;
                     on8 = !on8;
+                    count = 6;
                 }
             }
         });
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 3) {
+                if (expectedIndex == 3 && Frame.ITEM >= 3) {
                     imgVisible(1);
                 } else {
                     label1.setVisible(on1_2);
@@ -292,7 +333,7 @@ public class gameTest extends Frame{
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 3) {
+                if (expectedIndex == 3 && Frame.ITEM >= 6) {
                     imgVisible(2);
                 } else {
                     label2.setVisible(on2_2);
@@ -302,7 +343,7 @@ public class gameTest extends Frame{
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 3) {
+                if (expectedIndex == 3 && Frame.ITEM >= 4) {
                     imgVisible(3);
                 } else {
                     label3.setVisible(on3_2);
@@ -312,7 +353,7 @@ public class gameTest extends Frame{
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 3) {
+                if (expectedIndex == 3 && Frame.ITEM >= 5) {
                     imgVisible(4);
                 } else {
                     label4.setVisible(on4_2);
@@ -322,7 +363,7 @@ public class gameTest extends Frame{
         button5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 3) {
+                if (expectedIndex == 3 && Frame.ITEM >= 2) {
                     imgVisible(5);
                 } else {
                     label5.setVisible(on5_2);
@@ -332,7 +373,7 @@ public class gameTest extends Frame{
         button6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (expectedIndex == 3) {
+                if (expectedIndex == 3 && Frame.ITEM >= 1) {
                     imgVisible(6);
                 } else {
                     label6.setVisible(on6_2);
@@ -391,8 +432,58 @@ public class gameTest extends Frame{
         labelWasabi.setVisible(on7);
         labelRice.setVisible(on8);
     }
+
+    private void resetSushi(){
+
+        on1 = false;
+        on2 = false;
+        on3 = false;
+        on4 = false;
+        on5 = false;
+        on6 = false;
+        on7 = false;
+        on8 = false;
+
+        label1.setVisible(on1);
+        label2.setVisible(on2);
+        label3.setVisible(on3);
+        label4.setVisible(on4);
+        label5.setVisible(on5);
+        label6.setVisible(on6);
+        labelWasabi.setVisible(on7);
+        labelRice.setVisible(on8);
+    }
+
+    private static void updateScoreById(String filePath) throws IOException {
+        Path path = Paths.get(filePath);
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+            String[] columns = line.split(",");
+
+            // 가정: 각 열의 순서가 아이디, 비밀번호, 점수, 토핑 단계, 테마 번호, 날짜, 목숨 순서라고 가정
+            String id = columns[0].trim(); // 아이디 추출
+
+            if (id.equals(Frame.ID)) {
+                // 아이디가 일치하는 경우 점수 열을 변경
+                columns[2] = String.valueOf(Frame.SCORE);
+                columns[3] = String.valueOf(Frame.ITEM);
+                columns[4] = String.valueOf(Frame.TEMA);
+                // 변경된 열을 다시 문자열로 조합
+                String updatedLine = String.join(",", columns);
+                // 리스트에서 해당 라인을 업데이트
+                lines.set(i, updatedLine);
+                break; // 이미 찾았으므로 루프 종료
+            }
+        }
+
+        // 변경된 내용을 파일에 쓰기
+        Files.write(path, lines, StandardCharsets.UTF_8);
+    }
+
     public static void main(String[] args) {
-        new text();
+        new RandomImageLabelGUI();
     }
 
 }

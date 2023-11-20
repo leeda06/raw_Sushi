@@ -32,10 +32,9 @@ public class Main extends Frame {
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                new Store();
                 try {
-                    if(IDCount("user_database.txt")){
-                        new gameTest();
-                    }
+                    IDCount("user_database.txt");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

@@ -1,12 +1,13 @@
 package org.example;
 
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class gameTest extends Frame{
+public class text extends Frame{
     int expectedIndex = 1;
     //boolean
     boolean on1 = false;
@@ -79,7 +80,7 @@ public class gameTest extends Frame{
     private JLabel labelOrder1 = new JLabel(iconOrder1);
     private JLabel labelThankyou = new JLabel(iconThankyou);
     private JLabel labelSky = new JLabel(iconSky);
-    gameTest(){
+    text(){
         setLayout(null);
 
 

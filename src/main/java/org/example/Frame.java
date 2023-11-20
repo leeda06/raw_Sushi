@@ -12,6 +12,7 @@ public class Frame extends JFrame{
     public static int ITEM = 0;
     public static int COUNT = 5;
     public static String DDAY = "";
+    public static int GameDay = 0;
     Image screenImage;
     Graphics screenGraphics;
     JLabel background;

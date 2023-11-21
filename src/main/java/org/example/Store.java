@@ -48,7 +48,13 @@ public class Store extends Frame {
     private int itemsPerPage = 3;
     private int items_turn = 0;
     public Store() {
-
+        if(Frame.GameDay > 3){
+            Frame.GameDay = 0;
+            new Main();
+            setVisible(false);
+        }else{
+            Frame.GameDay ++;
+        }
         Item[][] items1 = {{
                 new Item("계란", "계란.png", 10,0),
                 new Item("연어", "연어.png", 20,1),
@@ -118,7 +124,7 @@ public class Store extends Frame {
         frameBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RandomImageLabelGUI();
+                new gameTest();
                 setVisible(false);
             }
         });
@@ -260,6 +266,7 @@ public class Store extends Frame {
                 columns[2] = String.valueOf(Frame.SCORE);
                 columns[3] = String.valueOf(Frame.ITEM);
                 columns[4] = String.valueOf(Frame.TEMA);
+                columns[7] = String.valueOf(Frame.GameDay);
                 // 변경된 열을 다시 문자열로 조합
                 String updatedLine = String.join(",", columns);
                 // 리스트에서 해당 라인을 업데이트
@@ -305,21 +312,6 @@ public class Store extends Frame {
         } else {
             System.out.println("점수 수정 실패.");
         }
-
-        int delayInSeconds = 60; // 60 seconds
-        int delayInMillis = delayInSeconds * 1000;
-
-        Timer timer = new Timer();
-        timer.clone(new TimerTask() {
-            @Override
-            public void run() {
-                // Switch to the Main class after the specified delay
-                SwingUtilities.invokeLater(() -> {
-                    new Main();
-                    dispose(); // Close the current Store frame
-                });
-            }
-        }, delayInMillis);
     }
 
     private void modifyScoreById(String targetId, int newScore) {
@@ -331,7 +323,6 @@ public class Store extends Frame {
     }
 
     public static void main(String[] args) {
-        new Store();
 
     }
 }

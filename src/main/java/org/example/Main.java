@@ -32,11 +32,16 @@ public class Main extends Frame {
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                new Store();
                 try {
                     IDCount("user_database.txt");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
+                }
+
+                if(Frame.COUNT >= 0){
+                    new Store();
+                }else{
+                    new Main();
                 }
                 setVisible(false);
             }
